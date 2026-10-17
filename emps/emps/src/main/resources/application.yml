@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: emps
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ems_db
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: roshanverma2505@gmail.com
+    password: umivvkenihlxqnnp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: EPMSSecretKeyForJWTAuthentication2026SpringBootProject
+  expiration: 86400000
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      hibernate:
+        SQL: DEBUG
+        orm:
+          jdbc:
+            bind: TRACE
+
+app:
+  upload:
+    documents-directory: uploads/documents/
+    support-directory: uploads/support/

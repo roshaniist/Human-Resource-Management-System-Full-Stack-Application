@@ -1,0 +1,74 @@
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:18
+    container_name: epms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ems_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - epms-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ems_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./emps/emps
+      dockerfile: Dockerfile
+    container_name: epms-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ems_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SPRING_MAIL_USERNAME: roshanverma2505@gmail.com
+      SPRING_MAIL_PASSWORD: umivvkenihlxqnnp
+      JWT_SECRET: EPMSSecretKeyForJWTAuthentication2026SpringBootProject
+      JWT_EXPIRATION: "86400000"
+      APP_UPLOAD_DOCUMENTS_DIRECTORY: /app/uploads/documents/
+      APP_UPLOAD_SUPPORT_DIRECTORY: /app/uploads/support/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./emps/uploads:/app/uploads
+    networks:
+      - epms-network
+
+   # Angular Frontend
+  frontend:
+    build:
+      context: ./emps_frontend
+      dockerfile: Dockerfile
+
+    container_name: epms-frontend
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+
+    ports:
+      - "4200:80"
+
+    networks:
+      - epms-network
+
+volumes:
+  postgres_data:
+
+networks:
+  epms-network:
+    driver: bridge
