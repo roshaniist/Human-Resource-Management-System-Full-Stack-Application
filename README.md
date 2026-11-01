@@ -1,59 +1,271 @@
-# TaskManagementUi
+# Enterprise Project Management System (EPMS)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+A Full-Stack Enterprise Project Management System built using **Java Spring Boot, Angular, Spring Security, JWT Authentication, PostgreSQL, and Docker**.
 
-## Development server
+EPMS is designed to simplify and manage employee information, departments, projects, tasks, attendance, leave requests, payroll, performance reviews, documents, reports, and IT support activities through a centralized web application.
 
-To start a local development server, run:
+---
+
+## Project Overview
+
+The Enterprise Project Management System (EPMS) is a web-based application that helps organizations manage their employees and daily business operations efficiently.
+
+The application provides role-based access control so that users can access features according to their assigned roles.
+
+It follows a full-stack architecture with Angular on the frontend, Spring Boot on the backend, and PostgreSQL as the database. Docker and Docker Compose are used to run the application services.
+
+## Key Features & Modules
+
+### 1. Authentication & Authorization
+- User Registration
+- User Login
+- Forgot Password
+- JWT-based Authentication
+- Spring Security Integration
+- Role-Based Access Control
+
+### 2. Employee Management
+- Add, View, Update and Manage Employees
+- Employee Profile Management
+- Employee Information and Status
+
+### 3. Department Management
+- Create and Manage Departments
+- Assign Employees to Departments
+- Department Information Management
+
+### 4. Project Management
+- Create and Manage Projects
+- Assign Project Managers
+- Assign Employees to Projects
+- Track Project Status
+
+### 5. Task Management
+- Create and Assign Tasks
+- Track Task Status
+- Manage Task Information
+- Monitor Task Progress
+
+### 6. Attendance Management
+- Employee Check-In and Check-Out
+- Break Start and End
+- Attendance History
+- Working Hours Calculation
+- Attendance Status Tracking
+
+### 7. Leave Management
+- Apply for Leave
+- View Leave History
+- Approve or Reject Leave Requests
+- Leave Status Tracking
+- Rejection Reason Management
+
+### 8. Payroll Management
+- Generate and Manage Payroll
+- Basic Salary and Allowances
+- Bonus and Deductions
+- Gross Salary and Net Salary
+- Payroll Status Tracking
+
+### 9. Performance Management
+- Employee Performance Reviews
+- Performance Tracking
+- Review Information Management
+
+### 10. Document Management
+- Upload Employee Documents
+- Manage Profile Photos
+- View and Download Documents
+
+### 11. Reports
+- Employee Reports
+- Department Reports
+- Employee Summary and Statistics
+
+### 12. IT Support
+- Create Support Tickets
+- Assign Support Tickets
+- Track Ticket Status
+- Manage IT Support Activities
+
+### 13. Notification Management
+- Automatic Notifications
+- Read and Unread Notifications
+- Mark Notifications as Read
+- Notification History
+
+---
+
+## Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Backend | Java 21, Spring Boot |
+| Security | Spring Security, JWT |
+| Backend Architecture | REST APIs |
+| ORM | Hibernate / Spring Data JPA |
+| Frontend | Angular, TypeScript |
+| UI | HTML, CSS, Bootstrap |
+| Database | PostgreSQL |
+| Build Tool | Maven |
+| Containerization | Docker |
+| Container Management | Docker Compose |
+| Version Control | Git and GitHub |
+
+---
+
+## Project Architecture
+
+The application follows a three-tier architecture.
+
+**1. Frontend Layer**
+- Developed using Angular.
+- Provides the user interface.
+- Communicates with the backend through REST APIs.
+
+**2. Backend Layer**
+- Developed using Java and Spring Boot.
+- Handles business logic and API requests.
+- Uses Spring Security and JWT for authentication and authorization.
+- Uses Hibernate/JPA for database operations.
+
+**3. Database Layer**
+- PostgreSQL stores application data.
+- Stores employee, department, project, task, attendance, leave, payroll, and other application records.
+
+---
+
+## Role-Based Access Control
+
+The application provides different access permissions based on user roles.
+
+Roles include:
+
+- ADMIN
+- HR
+- MANAGER
+- EMPLOYEE
+
+Each role has access to the features and operations permitted by the application's authorization rules.
+
+---
+
+## Docker Setup
+
+The project uses Docker Compose to manage the application services.
+
+### Prerequisites
+
+Install the following tools:
+
+- Git
+- Docker Desktop
+- Docker Compose
+
+### Clone Repository
 
 ```bash
-ng serve
+git clone https://github.com/roshaniist/Human-Resource-Management-System-Full-Stack-Application.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Navigate to Project Directory
 
 ```bash
-ng generate component component-name
+cd Human-Resource-Management-System-Full-Stack-Application
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Configure Environment Variables
+
+Create a `.env` file in the project root directory using the variables required by `docker-compose.yml`.
+
+Configure database credentials, JWT secrets, and other application settings.
+
+Do not commit the `.env` file to GitHub.
+
+### Run Application
 
 ```bash
-ng generate --help
+docker compose up -d
 ```
 
-## Building
-
-To build the project run:
+### Check Running Containers
 
 ```bash
-ng build
+docker compose ps
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### View Application Logs
 
 ```bash
-ng test
+docker compose logs -f
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Stop Application
 
 ```bash
-ng e2e
+docker compose down
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Application URLs
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+When running with the current local Docker port configuration:
+
+| Service | URL |
+|---|---|
+| Angular Frontend | http://localhost:4200 |
+| Spring Boot Backend | http://localhost:8080 |
+| PostgreSQL | localhost:5432 |
+
+---
+
+## Project Structure
+
+```text
+Human-Resource-Management-System-Full-Stack-Application/
+│
+├── emps/                       # Spring Boot Backend
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       └── resources/
+│   ├── pom.xml
+│   └── Dockerfile
+│
+├── emps_frontend/              # Angular Frontend
+│   ├── src/
+│   │   └── app/
+│   ├── package.json
+│   ├── angular.json
+│   └── Dockerfile
+│
+├── docker-compose.yml
+├── .dockerignore
+├── .gitignore
+├── .env                        # Local environment configuration
+└── README.md
+```
+
+---
+
+## Future Enhancements
+
+- Additional reporting and analytics features.
+- Improved dashboard visualizations.
+- Further automation of HR operations.
+- Additional application integrations.
+
+---
+
+## Author
+
+**Roshan Kumar**
+
+GitHub: https://github.com/roshaniist
+
+---
+
+## License
+
+This project is currently available for viewing on GitHub. No open-source license has been specified yet.
